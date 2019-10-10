@@ -18,8 +18,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+
+
 // Connecting to MongoDB
-mongoose.connect("mongodb://localhost/newsfinder", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsfinder";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
 
 // Routes
 // A GET route for scraping
