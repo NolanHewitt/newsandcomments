@@ -1,2 +1,1 @@
-# newsandcomments
-using scrapper
+readme
