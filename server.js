@@ -1,15 +1,15 @@
-var express = require("express");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 //scrappers
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 // Requiring the models
-var db = require("./models");
+const db = require("./models");
 //Port to use
-var PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3000;
 //Express
-var app = express();
+const app = express();
 
 // Logger
 app.use(logger("dev"));
@@ -31,13 +31,13 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.get("/scrape", function(req, res) {
   // Getting the body of the site with axios
   axios.get("https://www.newsinlevels.com").then(function(response) {
-    var $ = cheerio.load(response.data);
+    let $ = cheerio.load(response.data);
     console.log($);
 
     // Grab every h3 in each div
     $("div h3").each(function(i, element) {
       // Save an empty result object
-      var result = {};
+     let result = {};
       // Save the text and link of each a from each h3
       result.title = $(this)
         .children("a")
