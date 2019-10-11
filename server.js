@@ -58,7 +58,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Let us know when its done scrapping data
-    res.send("Scrape Complete");
+    res.send("Scrape complete, return to the previous page.");
   });
 });
 
