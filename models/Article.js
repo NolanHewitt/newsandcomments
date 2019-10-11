@@ -11,10 +11,10 @@ let ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  //id for note with reference to note model
-  note: {
+  //id for comment with reference to comment model
+  comment: {
     type: Schema.Types.ObjectId,
-    ref: "Note"
+    ref: "Comment"
   }
 });
 

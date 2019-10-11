@@ -58,7 +58,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Let us know when its done scrapping data
-    res.send("Scrape complete, return to the previous page.");
+    res.send("Scrape complete, return to the previous page and then refresh.");
   });
 });
 
@@ -78,8 +78,8 @@ app.get("/articles", function(req, res) {
 app.get("/articles/:id", function(req, res) {
   // Take the paramater as the id and find the article with the matching id
   db.Article.findOne({ _id: req.params.id })
-    // "Populate" all of the notes associated with the article
-    .populate("note")
+    // "Populate" all of the comments associated with the article
+    .populate("comment")
     .then(function(dbArticle) {
       // If that all worked out send it to the client
       res.json(dbArticle);
@@ -89,12 +89,12 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-// Route for saving notes
+// Route for saving comments
 app.post("/articles/:id", function(req, res) {
-  // Createing a new note using req.body
-  db.Note.create(req.body)
-    .then(function(dbNote) {
-      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+  // Createing a new comment using req.body
+  db.Comment.create(req.body)
+    .then(function(dbComment) {
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
     })
     .then(function(dbArticle) {
       // Send it to the client if its all good
